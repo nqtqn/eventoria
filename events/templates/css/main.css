@@ -1,0 +1,15 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1152px;
+    margin: 0 auto;
+}
+
+.grid-item {
+    width: 100%;
+    max-width: 256px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}

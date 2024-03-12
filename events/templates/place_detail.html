@@ -1,0 +1,192 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style1.css' %}">
+  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <script src="{% static 'main.js' %}"></script>
+  <title>{{ place.name }}</title>
+  <style>
+    .img {
+  margin-top: 20px;
+  margin-left: 10%;
+  width: 80%;
+  height: 500px;
+  border-radius: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)), url('{{ place.image.url }}');
+  background-size: cover;
+  padding: 15px;
+}
+  </style>
+</head>
+<header>
+  <div class="up">
+      <a href="{% url 'events_list' %}"><img class="logos" src="{% static 'images/logo.svg' %}" alt="logo"></a>
+      <button onclick="openModal()"   ><div  class="karta"><img src="{% static 'images/minimap.png' %}" alt=""><span class="city-pos">{% if selected_city %} {{ selected_city }}{% endif %}</span></div></button>
+
+      <div id="cityModal" class="modal" onclick="closeModalOutside(event)">
+          <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="close-btn close-btn-top-right" onclick="closeModal()">&times;</span>
+            
+            {% comment %} <ul id="cityList">
+              <li><a href="https://www.almaty.kz/">Астана</a></li>
+              <li><a href="https://www.nur-sultan.org/">Алмата</a></li>
+              <li><a href="https://www.nur-sultan.org/">Шымкент</a></li>
+              <li><a href="https://www.nur-sultan.org/">Бишкек</a></li>
+              <li><a href="https://www.nur-sultan.org/">Туркестан</a></li>
+              <li><a href="https://www.nur-sultan.org/">Караганда</a></li>
+              <li><a href="https://www.nur-sultan.org/">Актобе</a></li>
+              <li><a href="https://www.nur-sultan.org/">Аксу</a></li>
+              <li><a href="https://www.nur-sultan.org/">Актау</a></li>
+              <li><a href="https://www.nur-sultan.org/">Атырау</a></li>
+              <li><a href="https://www.nur-sultan.org/">Жанаозен</a></li>
+              <li><a href="https://www.nur-sultan.org/">Жезказган</a></li>
+              <li><a href="https://www.nur-sultan.org/">Кокшетау</a></li>
+              <li><a href="https://www.nur-sultan.org/">Костанай</a></li>
+              <li><a href="https://www.nur-sultan.org/">Кызылорда</a></li>
+              <li><a href="https://www.nur-sultan.org/">Павлодар</a></li>
+              <li><a href="https://www.nur-sultan.org/">Петропаловск</a></li>
+              <li><a href="https://www.nur-sultan.org/">Риддер</a></li>
+              <li><a href="https://www.nur-sultan.org/">Рудный</a></li>
+              <li><a href="https://www.nur-sultan.org/">Семей</a></li>
+              <li><a href="https://www.nur-sultan.org/">Талгар</a></li>
+              <li><a href="https://www.nur-sultan.org/">Талдыкорган</a></li>
+              <li><a href="https://www.nur-sultan.org/">Тараз</a></li>
+              <li><a href="https://www.nur-sultan.org/">Темиртау</a></li>
+              <li><a href="https://www.nur-sultan.org/">Уральск</a></li>
+              <li><a href="https://www.nur-sultan.org/">Усть-Каменогорск</a></li>
+              <li><a href="https://www.nur-sultan.org/">Экибастуз</a></li>
+              <li><a href="https://www.nur-sultan.org/">Ташкент</a></li>
+            </ul> {% endcomment %}
+            <form method="get" action="{% url 'places_list' %}">
+              <label for="city">Select a city:</label>
+              <select name="city" id="city">
+                  <option value="">All Cities</option>
+                  <option value="astana">Astana</option>
+                  <option value="almaty">Almaty</option>
+                  <option value="tashkent">tashkent</option>
+                  <option value="ekibastus">ekibastus</option>
+                  <option value="taraz">taraz</option>
+                  <option value="semei">semei</option>
+                  <option value="rudni">rudni</option>
+                  <option value="pavlodar">pavlodar</option>
+                  <option value="kostanai">kostanai</option>
+                  <option value="janaozen">janaozen</option>
+                  <option value="aktau">aktau</option>
+                  <option value="aktobe">aktobe</option>
+
+              </select>
+              <button type="submit">выбрать</button>
+          </form>
+          </div>
+        </div>
+
+
+      <div class="left-side">
+          <div class="language" class="burger-menu">
+            <div class="burger-icon" id="burger-icon">русский
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="manu" id="menu">
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="language-option">English</a>
+              <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" class="language-option">Español</a>
+              <a href="https://www.youtube.com/watch?v=k85mRPqvMbE" class="language-option">Français</a>
+              <!-- Добавьте другие языки по необходимости -->
+            </div>
+          </div>
+          
+          <div class="persom">
+              {% if user.is_authenticated %}
+             <a href="{% url 'profile' %}">
+              {% else %}
+              <a href="{% url 'login_or_register' %}">
+                {% endif %}
+                <img src="{% static 'images/persom.png' %}" alt="Your Image">
+                 </a>
+              
+              {% comment %} <a href="profile.html"><img src="persom.png" alt=""></a> {% endcomment %}
+          
+          
+          </div>
+      </div>
+  </div>
+  <div class="menu">
+      
+      <div class="menus"><a class="a-menu" href="{% url 'events_list' %}"><img class="img-menu" src="{% static 'images/menu2.png' %}" alt=""><span class="men-2">Афиша</span></a></div>
+      <div class="menus"><a class="a-menu" href="{% url 'places_list' %}"><img class="img-menu" src="{% static 'images/minimap.png' %}" alt=""><span class="men-3">Места</span></a></div>
+      <div class="menus"><a class="a-menu" href="#bottom"><img class="img-menu" src="{% static 'images/menu4.png' %}" alt=""><span class="men-4">Журнал</span></a></div>
+  </div>
+</header>
+<body>
+
+    <div class="conteiner">
+        <div class="fullnews_top">
+          <div class="img">
+            <p class="akon"><b>{{ place.name }}</b></p>
+          </div>
+        </div>
+
+
+        
+    <!-- <h1>{{ event.title }}</h1>
+    <p>Location: {{ event.location }}</p>
+    <p>Address: {{ event.address }}</p>
+    <p>Short Description: {{ event.short_description }}</p>
+    <p>Full Description: {{ event.full_description }}</p>
+    <p>Category: {{ event.category }}</p>
+    <p>Start Date and Time: {{ event.start_datetime }}</p>
+    <p>End Date and Time: {{ event.end_datetime }}</p>
+    <img src="{{ event.preview_image.url }}" alt="{{ event.title }}" style="max-width: 100%;"> -->
+
+
+    <div class="about">
+        <div class="txt-con">
+          <div class="txt">
+            <p> {{ place.full_description|safe }}</p>
+             <hr>
+             <p><div class="teg">
+              <div class="tegs">{{ place.address }}</div>
+              <div class="tegs">{{ place.phone_number }}</div>
+             </div></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+
+<footer>
+
+    
+    <div class="footer-center">
+        <div class="fuuter">
+            <div class="inner-fuuter">
+                <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-telegram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+
+            </div>
+            <div class="inner-fuuter">
+                <a href="">О нас</a>
+                <a href="">Контакты</a>
+                <a href="">Поддержать нас</a>
+                <a href="">Политика сайта</a>
+                
+            </div>
+            <div class="inner-futer">
+                <p>Our project</p>
+                <p>Cazino</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

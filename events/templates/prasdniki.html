@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style1.css' %}">
+  <script src="{% static 'main.js' %}"></script>
+  <title>{{ place.name }}</title>
+  <style>
+    .img {
+  margin-top: 20px;
+  margin-left: 10%;
+  width: 80%;
+  height: 500px;
+  border-radius: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)), url('{% static 'images/hohoho.jpg' %}');
+  background-size: cover;
+  padding: 15px;
+}
+  </style>
+</head>
+<header>
+    <div class="up">
+        <a href="main.html"><img src="" alt="logo"></a>
+        <button onclick="openModal()"   ><div  class="karta"><img src="minimap.png" alt=""><span class="city-pos">Aстана</span></div></button>
+
+        <div id="cityModal" class="modal" onclick="closeModalOutside(event)">
+            <div class="modal-content">
+              <span class="close-btn" onclick="closeModal()">&times;</span>
+              <span class="close-btn close-btn-top-right" onclick="closeModal()">&times;</span>
+              <h2>Выберите город:</h2>
+              <input type="text" id="citySearch" class="search-input" placeholder="Поиск по городам" oninput="filterCities()">
+              <ul id="cityList">
+                <li><a href="https://www.almaty.kz/">Астана</a></li>
+                <li><a href="https://www.nur-sultan.org/">Алмата</a></li>
+                <li><a href="https://www.nur-sultan.org/">Шымкент</a></li>
+                <li><a href="https://www.nur-sultan.org/">Бишкек</a></li>
+                <li><a href="https://www.nur-sultan.org/">Туркестан</a></li>
+                <li><a href="https://www.nur-sultan.org/">Караганда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актобе</a></li>
+                <li><a href="https://www.nur-sultan.org/">Аксу</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Атырау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жанаозен</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жезказган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кокшетау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Костанай</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кызылорда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Павлодар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Петропаловск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Риддер</a></li>
+                <li><a href="https://www.nur-sultan.org/">Рудный</a></li>
+                <li><a href="https://www.nur-sultan.org/">Семей</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талгар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талдыкорган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Тараз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Темиртау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Уральск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Усть-Каменогорск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Экибастуз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Ташкент</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+        <div class="left-side">
+            <div class="language" class="burger-menu">
+              <div class="burger-icon" id="burger-icon">русский
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="manu" id="menu">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="language-option">English</a>
+                <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" class="language-option">Español</a>
+                <a href="https://www.youtube.com/watch?v=k85mRPqvMbE" class="language-option">Français</a>
+                <!-- Добавьте другие языки по необходимости -->
+              </div>
+            </div>
+            
+            <div class="persom"><a href="profile.html"><img src="persom.png" alt=""></a></div>
+        </div>
+    </div>
+    <div class="menu">
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu1.png" alt=""><span class="men-1">билеты</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu2.png" alt=""><span class="men-2">Афиша</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="minimap.png" alt=""><span class="men-3">Места</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu4.png" alt=""><span class="men-4">Журнал</span></a></div>
+    </div>
+</header>
+<body>
+
+    <div class="conteiner">
+        <div class="fullnews_top">
+          <div class="img">
+            <p class="akon"><b>{{ place.name }}</b></p>
+          </div>
+        </div>
+
+
+        
+    
+
+
+    <div class="about">
+        <div class="txt-con">
+          <div class="txt">
+            <p>Детский утренник — главный атрибут Нового года и место, где все еще живет сокровенная вера в Дедушку Мороза. Мы нашли для вас новогодние утренники для детей, которые пройдут в Астане в канун Нового года: от традиционных театральных постановок и интерактивных спектаклей до невероятных шоу и фантастических цирковых представлений. </p>
+            <p><b>Детский утренник «Новогодний вихрь времени в игровом мире»</b></p>
+            <p>Отель Rixos и Академия детских праздников приглашают вас окунуться в праздничную атмосферу. В канун нового года главные герои видеоигр соберутся вместе, чтобы отпраздновать праздник в уютной игровой вселенной. Героям предстоит вместе со зрителями преодолеть различные препятствия на пути к Деду Морозу и Снегурочке.</p>
+            <p>Адрес: Отель Rixos President Astana, ул. Кунаева, 7</p> 
+            <p>Стоимость: от 15 000 тенге. Купить билет можно по ссылке</p>
+            <p>Контакты: +7 775 759 40 00</p>
+            <p><b>Новогодний спектакль «Однажды в Новый Год»</b></p>
+            <p>Театр кукол рад пригласить вас на захватывающее Новогоднее приключение в компании ваших любимых героев мультфильмов и сказок! В программе мероприятия – новогодний утренник с популярными персонажами, фотосессия и новогодний спектакль</p>
+            <p>Адрес: Театр кукол, ​пр. Республики, 3</p> 
+            <p>Стоимость: 2500 тенге</p>
+            <p>Контакты: + 7 702 069 16 7</p>
+            <p><b>Мюзикл «Аладдин в поисках дракона»</b></p>
+            <p>Насладитесь волшебством новогоднего представления  для детей «Аладдин в поисках дракона» в самом сердце Астаны! В программу входит сказочная встреча гостей и фотосессия с героями, просмотр музыкального представления, активное участие в новогоднем интерактивном мюзикле – помочь героям победить зло и спасти Новый год. Также будут интерактивные игры с героями представления и сказочными новогодними персонажами. </p>
+            <p>Адрес: Astana Saad Hotel, улица Достык, 2</p> 
+            <p>Стоимость: от 9500 тенге. Купить билет можно по ссылке</p>
+            <p>Контакты: +7 775 655 5321</p>
+            <p><b>Детский утренник «Гринч Похититель Нового Года»</b></p>
+            <p>В Астане предстоит захватывающее шоу и новогодний утренник для детей. Всех гостей ждет 1,5 часа увлекательной и активной программы, встреча с десятью любимыми героями, участие профессиональных аниматоров, несколько волшебных Дедов Морозов, разнообразные фотозоны для ярких воспоминаний, захватывающее анимационное шоу, музыкальные выступления и DJ, а также сладкий подарок для каждого участника.</p>
+            <p>Адрес: Wyndham Garden Astana, ул. Хусейн бен Талал, 25</p> 
+            <p>Стоимость: 10 000 тенге. Купить билет можно по ссылке</p>
+            <p>Контакты: +7 706 662 55 98</p>
+            <p><b>Современная Елка «Новогодняя Мультивселенная»</b></p>
+            <p>В этом году Микки и Мини Маус отправляются в захватывающее приключение по мультивселенной, чтобы поздравить всех героев с наступающим Новым годом. Однако им не предстояло предугадать, какие испытания ждут их в этом захватывающем путешествии.Когда герои готовились к встрече с Новым Годом, коварный Гринч и Гринчетта решили нарушить праздничное настроение и привнести хаос в волшебную вселенную. Теперь Микки и Мини Маусу придется преодолеть самые невероятные препятствия, чтобы помочь героям Диснея противостоять кознам коварного Гринча и восстановить праздничную атмосферу.   </p>
+            <p>Адрес: Wyndham Garden Astana, ул. Хусейн бен Талал, 25   </p> 
+            <p>Стоимость: 5000 тенге. Купить билет можно по ссылке</p>
+            <p>онтакты: +7 +7 777 150 0349</p>
+            <p><b>Шоу-спектакль «Мечты Меняющие Мир»</b></p>
+            <p>Создатели семейного шоу «Мечты, Меняющие Мир», приглашают вас на новогоднее представление с новыми историями. Это уникальное шоу, наполненное захватывающими экспериментами, поразительными спецэффектами, эффектным лазерным шоу и опытами с электричеством, которые воссоздают открытия великих ученых и изобретателей. В ходе шоу дети вместе с родителями станут частью волшебной лаборатории, где смогут найти формулу для исполнения своих мечт.</p>
+            <p>Адрес: Nomad City Hall, пр. Мангилик Ел, B2.3</p> 
+            <p>Стоимость: от 6000 тенге</p>
+            <p>Контакты: +7 717 233 65 82</p>
+           
+            <hr>
+             <p><div class="teg">
+              <div class="tegs">{{ place.address }}</div>
+              <div class="tegs">{{ place.phone_number }}</div>
+             </div></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+
+<footer>
+
+    
+    <div class="footer-center">
+        <div class="fuuter">
+            <div class="inner-fuuter">
+                <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-telegram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+
+            </div>
+            <div class="inner-fuuter">
+                <a href="">О нас</a>
+                <a href="">Контакты</a>
+                <a href="">Поддержать нас</a>
+                <a href="">Политика сайта</a>
+                
+            </div>
+            <div class="inner-futer">
+                <p>Our project</p>
+                <p>Cazino</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

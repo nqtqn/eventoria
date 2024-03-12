@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <script src="{% static 'main.js' %}"></script>
+    <title>{{ place.name }}</title>
+    <style>
+      .img {
+    margin-top: 20px;
+    margin-left: 10%;
+    width: 80%;
+    height: 500px;
+    border-radius: 30px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)), url('{% static 'images/kino.jpg' %}');
+    background-size: cover;
+    padding: 15px;
+  }
+    </style>
+  </head>
+<header>
+    <div class="up">
+        <a href="main.html"><img src="" alt="logo"></a>
+        <button onclick="openModal()"   ><div  class="karta"><img src="minimap.png" alt=""><span class="city-pos">Aстана</span></div></button>
+
+        <div id="cityModal" class="modal" onclick="closeModalOutside(event)">
+            <div class="modal-content">
+              <span class="close-btn" onclick="closeModal()">&times;</span>
+              <span class="close-btn close-btn-top-right" onclick="closeModal()">&times;</span>
+              <h2>Выберите город:</h2>
+              <input type="text" id="citySearch" class="search-input" placeholder="Поиск по городам" oninput="filterCities()">
+              <ul id="cityList">
+                <li><a href="https://www.almaty.kz/">Астана</a></li>
+                <li><a href="https://www.nur-sultan.org/">Алмата</a></li>
+                <li><a href="https://www.nur-sultan.org/">Шымкент</a></li>
+                <li><a href="https://www.nur-sultan.org/">Бишкек</a></li>
+                <li><a href="https://www.nur-sultan.org/">Туркестан</a></li>
+                <li><a href="https://www.nur-sultan.org/">Караганда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актобе</a></li>
+                <li><a href="https://www.nur-sultan.org/">Аксу</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Атырау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жанаозен</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жезказган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кокшетау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Костанай</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кызылорда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Павлодар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Петропаловск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Риддер</a></li>
+                <li><a href="https://www.nur-sultan.org/">Рудный</a></li>
+                <li><a href="https://www.nur-sultan.org/">Семей</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талгар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талдыкорган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Тараз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Темиртау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Уральск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Усть-Каменогорск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Экибастуз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Ташкент</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+        <div class="left-side">
+            <div class="language" class="burger-menu">
+              <div class="burger-icon" id="burger-icon">русский
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="manu" id="menu">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="language-option">English</a>
+                <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" class="language-option">Español</a>
+                <a href="https://www.youtube.com/watch?v=k85mRPqvMbE" class="language-option">Français</a>
+                <!-- Добавьте другие языки по необходимости -->
+              </div>
+            </div>
+            
+            <div class="persom"><a href="profile.html"><img src="persom.png" alt=""></a></div>
+        </div>
+    </div>
+    <div class="menu">
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu1.png" alt=""><span class="men-1">билеты</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu2.png" alt=""><span class="men-2">Афиша</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="minimap.png" alt=""><span class="men-3">Места</span></a></div>
+        <div class="menus"><a class="a-menu" href=""><img class="img-menu" src="menu4.png" alt=""><span class="men-4">Журнал</span></a></div>
+    </div>
+</header>
+<body>
+
+    <div class="conteiner">
+        <div class="fullnews_top">
+          <div class="img">
+            <p class="akon"><b>{{ place.name }}</b></p>
+          </div>
+        </div>
+
+
+        
+    
+
+
+    <div class="about">
+        <div class="txt-con">
+          <div class="txt">
+            <p>Чтобы полностью погрузиться в фильм иногда так не достает большого экрана и объемных звуков. Для таких случаев в столице имеются множество кинорумов. Они привлекают уютной и уединенной атмосферой, а также возможностью насладиться любимыми фильмами не отвлекаясь на хруст попкорна и разговоры людей.  В подборке собрали список кинорумов Астаны, где можно нырнуть в мир кино, весело провести время с близкими людьми и даже отметить праздничные события.</p>
+            <p><b>The Gentlemen</b></p>
+            <p>В киноруме 6 VIP-комнат для просмотра кино с FullHD качеством. Вместимость составляет от 2 до 25 человек в зависимости от вида комнаты. При киноруме имеется собственный бар, где можно купить напитки и вкусные закуски к просмотру фильмов. Также имеются готовые сеты, в стоимость которого входит аренда зала, снэки или услуги оформления</p>
+            <p>Стоимость: от 1250 тенге за час</p> 
+            <p>Телефон: +7 775 587 14 50</p>
+            <p>Адрес: ул. Манас, 9а, ул. Кабанбай батыра, 40</p>
+            <p><b> Дубль 2</b></p>
+            <p>В заведении представлены три зала со всеми удобствами для просмотра кино: малый, средний и большой. В киноруме можно собраться с друзьями, заказать еду, посмотреть кино или поиграть в любимые игры. Помимо этого, в «Дубль 2» можно устроить романтическое свидание, отметить день рождения, или другие праздничные мероприятия. Здесь представлена богатейшая коллекция фильмов — выберите картину из каталога на свой вкус.</p>
+            <p>Стоимость: дневной пакет от 1750 тенге, ночной пакет от 7000 тенге</p> 
+            <p>Телефон: +7 747 049 09 65</p>
+            <p>Адрес: пр. Момышулы, 19/2</p>
+            <p><b> Movie House</b></p>
+            <p>Movie house – частный кинотеатр с удобным расположением и 4 просторными кинозалами. Место подойдет для романтических свиданий, семейных просмотров, дружеских встреч и корпоративных событий. Также здесь можно заказать шоу-программу для праздничных мероприятий. Помимо просмотра фильмов, в Movie house есть возможность поиграть в PlayStation, попеть в караоке и посмотреть спортивные трансляции. Именинникам, студентам и школьникам предлагается скидка.</p>
+            <p>Стоимость: от 1750 тенге/час </p> 
+            <p>Телефон: +7 705 597 02 05</p>
+            <p>Адрес: ул. Бухар жырау, 34/2</p>
+            <p><b>Hollywood</b></p>
+            <p>В киноруме представлены 6 VIP-залов с индивидуальным интерьером и разной вместимости. Здесь можно посмотреть фильмы, поиграть в PS4 или организовать свидание. Есть специальные сеты для просмотра кино, а также предлагается  романтическое оформление зала для особых случаев. Огромный экран, высококачественное изображение и объёмный звук позволяют полностью погрузиться в события ленты.</p>
+            <p>Стоимость: в будни от 2000 тг/час (на 2 человека), в выходные от 2500 тенге  </p> 
+            <p>Стоимость: в будни от 2000 тг/час (на 2 человека), в выходные от 2500 тенге </p>
+            <p>Адрес: пр. Сарыарка,3, ул. ул Мухамедханова 17/1</p>
+            <p><b>GALA ROOMS</b></p>
+            <p>В киноруме работает несколько кинозалов разной вместимости, которые полностью оборудованы для качественного просмотра кино. Имеются серый, красный и синий залы. Обстановка залов располагает к комфортному и уютному времяпрепровождению. Здесь можно собраться с друзьями, устроить свидание или просто посмотреть фильм.  Для свиданий можно заказать романтическое оформление.</p>
+            <p>Стоимость: 2000 тенге за час</p> 
+            <p>Телефон: +7 707 515 33 15, +7 747 500 50 00  </p>
+            <p>Адрес: ул. Достык, 5</p>
+            <p><b>Kino Time</b></p>
+            <p>Kino Time позиционируется как антикафе. Помимо просмотра кино, игры в приставку и настольный футбол, здесь есть залы с караоке. В киноруме на выбор представлены несколько залов разной вместительности. Также предусмотрены специальные киносеты.   </p>
+            <p>Стоимость: от 2000 тенге/час (на 2 человека)</p> 
+            <p>Телефон: +7 776 168 13 30</p>
+            <p>Адрес: ул. Сейфуллина, 5</p>
+            <p><b>Chubary Rooms</b></p>
+            <p>Кинорум Chubary приглашает посетителей насладиться любимыми фильмами в уютной атмосфере. На выбор предлагается 7 кинозалов разной вместимости, названные в честь известных городов. Есть и другие развлечения: караоке, PS5, настольные игры и спортивные трансляции.</p>
+            <p>Стоимость: от 2000 тенге/час </p> 
+            <p>Телефон: +7 707 809 31 67</p>
+            <p>Адрес: ул. Ондасынов, 22</p>
+            <p><b> Kino Moon</b></p>
+            <p>Место, где можно посмотреть качественные фильмы, спеть караоке, поиграть в настольные игры или отметить день рождения. Камерная и уютная атмосфера кинорума располагает к комфорту. Можно арендовать зал на несколько часов либо заказать специальные сеты. Еду и напитки разрешается брать с собой (комиссия 500 тенге).</p>
+            <p>Стоимость: от 2500 тенге/час </p> 
+            <p>Телефон: +7‒747‒028‒86‒53</p>
+            <p>Адрес: ул. Нажимеденов, 34</p>
+           
+           
+            <hr>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+
+<footer>
+
+    
+    <div class="footer-center">
+        <div class="fuuter">
+            <div class="inner-fuuter">
+                <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-telegram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+
+            </div>
+            <div class="inner-fuuter">
+                <a href="">О нас</a>
+                <a href="">Контакты</a>
+                <a href="">Поддержать нас</a>
+                <a href="">Политика сайта</a>
+                
+            </div>
+            <div class="inner-futer">
+                <p>Our project</p>
+                <p>Cazino</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

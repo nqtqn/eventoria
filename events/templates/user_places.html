@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Places</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <script src="{% static 'main.js' %}"></script>
+</head>
+<body>
+    <header>
+        <div class="up">
+            <a href="{% url 'events_list' %}"><img class="logos" src="{% static 'images/logo.svg' %}" alt="logo"></a>
+            <button onclick="openModal()"   ><div  class="karta"><img src="minimap.png" alt=""><span class="city-pos">Aстана</span></div></button>
+
+            <div id="cityModal" class="modal" onclick="closeModalOutside(event)">
+                <div class="modal-content">
+                  <span class="close-btn" onclick="closeModal()">&times;</span>
+                  <span class="close-btn close-btn-top-right" onclick="closeModal()">&times;</span>
+                  <h2>Выберите город:</h2>
+                  <input type="text" id="citySearch" class="search-input" placeholder="Поиск по городам" oninput="filterCities()">
+                  <ul id="cityList">
+                    <li><a href="https://www.almaty.kz/">Астана</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Алмата</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Шымкент</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Бишкек</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Туркестан</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Караганда</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Актобе</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Аксу</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Актау</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Атырау</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Жанаозен</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Жезказган</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Кокшетау</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Костанай</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Кызылорда</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Павлодар</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Петропаловск</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Риддер</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Рудный</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Семей</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Талгар</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Талдыкорган</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Тараз</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Темиртау</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Уральск</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Усть-Каменогорск</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Экибастуз</a></li>
+                    <li><a href="https://www.nur-sultan.org/">Ташкент</a></li>
+                  </ul>
+                </div>
+              </div>
+
+
+            <div class="left-side">
+                <div class="language" class="burger-menu">
+                  <div class="burger-icon" id="burger-icon">русский
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="manu" id="menu">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="language-option">English</a>
+                    <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" class="language-option">Español</a>
+                    <a href="https://www.youtube.com/watch?v=k85mRPqvMbE" class="language-option">Français</a>
+                    
+                  </div>
+                </div>
+                
+                <div class="persom">
+                    {% if user.is_authenticated %}
+                   <a href="{% url 'profile' %}">
+                    {% else %}
+                    <a href="{% url 'login_or_register' %}">
+                      {% endif %}
+                      <img src="{% static 'images/persom.png' %}" alt="Your Image">
+                       </a>
+                    
+                    {% comment %} <a href="profile.html"><img src="persom.png" alt=""></a> {% endcomment %}
+                
+                
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menus"><a class="a-menu" href="{% url 'profile' %}"><img class="img-menu" src="menu1.png" alt=""><span class="men-1">Профиль</span></a></div>
+            <div class="menus"><a class="a-menu" href="{% url 'edit_profile' %}"><img class="img-menu" src="menu2.png" alt=""><span class="men-2">Найстройка профиля</span></a></div>
+            <div class="menus"><a class="a-menu" href="{% url 'user_places' %}"><img class="img-menu" src="minimap.png" alt=""><span class="men-3"> Мои места</span></a></div>
+            <div class="menus"><a class="a-menu" href="{% url 'user_events' %}"><img class="img-menu" src="menu4.png" alt=""><span class="men-4">Мои события</span></a></div>
+        </div>
+    </header> 
+
+
+
+
+
+    
+    <div class="itemes gogo">
+        <h2>Your Places</h2>
+        <div class="bobo"><a href="{% url 'add_place' %}">добавить место</a></div>
+        </div>
+    <div class="container-info">
+    {% for place in user_places %}
+        <div class="item">
+            <div class="info-img-1"><img class="images" src="{{ place.image.url }}" alt=""></div>
+            <div><p class="info-name"><b><a href="{% url 'place_detail' place.id %}">{{ place.name }}</a></b></p>
+            </div>
+            <a  href="{% url 'edit_place' place.id %}">Редактировать</a>
+            <a href="{% url 'delete_place' place.id %}">Удалить</a>
+        </div>
+    {% endfor %}
+</div>
+    {% comment %} {% for place in user_places %}
+            <li>
+                {{ place.name }}
+                (<a href="{% url 'edit_place' place.id %}">Редактировать</a>,
+                <a href="{% url 'delete_place' place.id %}">Удалить</a>)
+            </li>
+        {% endfor %} {% endcomment %}
+
+
+
+
+        <footer>
+
+    
+            <div class="footer-center">
+                <div class="fuuter">
+                    <div class="inner-fuuter">
+                        <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-telegram fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+        
+                    </div>
+                    <div class="inner-fuuter">
+                        <a href="">О нас</a>
+                        <a href="">Контакты</a>
+                        <a href="">Поддержать нас</a>
+                        <a href="">Политика сайта</a>
+                        
+                    </div>
+                    <div class="inner-futer">
+                        <p>Our project</p>
+                        <p>Cazino</p>
+                    </div>
+                </div>
+            </div>
+        </footer>       
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style1.css">
+  <script src="main.js"></script>
+  <title>{{ place.name }}</title>
+  <style>
+    .img {
+  margin-top: 20px;
+  margin-left: 10%;
+  width: 80%;
+  height: 500px;
+  border-radius: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)), url('{{ place.image.url }}');
+  background-size: cover;
+  padding: 15px;
+}
+  </style>
+</head>
+<header>
+    <div class="up">
+        <a href="main.html"><img src="" alt="logo"></a>
+        
+
+        <div id="cityModal" class="modal" onclick="closeModalOutside(event)">
+            <div class="modal-content">
+              <span class="close-btn" onclick="closeModal()">&times;</span>
+              <span class="close-btn close-btn-top-right" onclick="closeModal()">&times;</span>
+              <h2>Выберите город:</h2>
+              <input type="text" id="citySearch" class="search-input" placeholder="Поиск по городам" oninput="filterCities()">
+              <ul id="cityList">
+                <li><a href="https://www.almaty.kz/">Астана</a></li>
+                <li><a href="https://www.nur-sultan.org/">Алмата</a></li>
+                <li><a href="https://www.nur-sultan.org/">Шымкент</a></li>
+                <li><a href="https://www.nur-sultan.org/">Бишкек</a></li>
+                <li><a href="https://www.nur-sultan.org/">Туркестан</a></li>
+                <li><a href="https://www.nur-sultan.org/">Караганда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актобе</a></li>
+                <li><a href="https://www.nur-sultan.org/">Аксу</a></li>
+                <li><a href="https://www.nur-sultan.org/">Актау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Атырау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жанаозен</a></li>
+                <li><a href="https://www.nur-sultan.org/">Жезказган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кокшетау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Костанай</a></li>
+                <li><a href="https://www.nur-sultan.org/">Кызылорда</a></li>
+                <li><a href="https://www.nur-sultan.org/">Павлодар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Петропаловск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Риддер</a></li>
+                <li><a href="https://www.nur-sultan.org/">Рудный</a></li>
+                <li><a href="https://www.nur-sultan.org/">Семей</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талгар</a></li>
+                <li><a href="https://www.nur-sultan.org/">Талдыкорган</a></li>
+                <li><a href="https://www.nur-sultan.org/">Тараз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Темиртау</a></li>
+                <li><a href="https://www.nur-sultan.org/">Уральск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Усть-Каменогорск</a></li>
+                <li><a href="https://www.nur-sultan.org/">Экибастуз</a></li>
+                <li><a href="https://www.nur-sultan.org/">Ташкент</a></li>
+              </ul>
+            </div>
+          </div>
+
+
+        <div class="left-side">
+            <div class="language" class="burger-menu">
+              <div class="burger-icon" id="burger-icon">русский
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="manu" id="menu">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="language-option">English</a>
+                <a href="https://www.youtube.com/watch?v=9bZkp7q19f0" class="language-option">Español</a>
+                <a href="https://www.youtube.com/watch?v=k85mRPqvMbE" class="language-option">Français</a>
+                <!-- Добавьте другие языки по необходимости -->
+              </div>
+            </div>
+            
+            <div class="persom"><a href="profile.html"><img src="persom.png" alt=""></a></div>
+        </div>
+    </div>
+    <div class="menu">
+            
+      <div class="menus"><a class="a-menu" href="{% url 'events_list' %}"><img class="img-menu" src="{% static 'images/menu2.png' %}" alt=""><span class="men-2">Афиша</span></a></div>
+      <div class="menus"><a class="a-menu" href="{% url 'places_list' %}"><img class="img-menu" src="{% static 'images/minimap.png' %}" alt=""><span class="men-3">Места</span></a></div>
+      <div class="menus"><a class="a-menu" href="#bottom"><img class="img-menu" src="{% static 'images/menu4.png' %}" alt=""><span class="men-4">Журнал</span></a></div>
+  </div>
+</header>
+<body>
+
+    <div class="conteiner">
+        <div class="fullnews_top">
+          <div class="img">
+            <p class="akon"><b>{{ place.name }}</b></p>
+          </div>
+        </div>
+
+
+        
+    
+
+
+    <div class="about">
+        <div class="txt-con">
+          <div class="txt">
+            <p>Ранее мы публиковали список заведений Астаны, где можно отметить новогодний корпоратив. Однако, одна подборка – хорошо, а две — еще лучше. Встречайте вторую часть.</p>
+            <p><b>ШашлыкоFF</b></p>
+            <p>Корпоратив можно провести во всех филиалах гриль-бара ШашлыкоFF. Вас ждет развлекательная шоу-программа с участием ведущего, диджея, Деда Мороза и Снегурочки. Ресторан подготовил для гостей новогоднее меню, интересные конкурсы и призы и пленительную атмосферу праздника.</p>
+            <p>Стоимость: от 15 000 тенге с человека </p> 
+            <p>Адрес: ул. Иманова 52, ул. Керея и Жанибека ханов 12Б, ул. Ауэзова 43</p>
+            <p>Телефон: +7 707 165 50 50, +7 702 341 28 28, +7 747 543 13 13</p>
+            <p><b>Ресторан «Кутаиси»</b></p>
+            <p>В уютной атмосфере Грузии провести новогодний корпоратив предлагает ресторан «Кутаиси». Можно бронировать зал с 20 декабря. В программе праздника гостей ждут поздравления и подарки от Деда Мороза и Снегурочки, танцевальное шоу, живая музыка, ведущий, создающий теплую и новогоднюю атмосферу, розыгрыш призов, интересные игры и конкурсы.</p>
+            <p>Стоимость: от 18 000 тенге с человека </p>
+            <p>Адрес: ​пр. Бауыржана Момышулы, 13</p>
+            <p>Телефон: +7 778 002 03 03, +7 701 541 03 04</p>
+            <p><b>Vzлетный</b></p>
+            <p>Для празднования корпоратива рестобар предлагает общий зал с танцполом вместимостью до 200 человек и VIP-комнаты с караоке до 60 человек. Гостей вечера ждет ведущий, DJ сет, живая музыка, веселые интерактивы с гостями, а также Дед Мороз и Снегурочка. О новогоднем меню здесь также позаботились – ресторан предлагает несколько пакетов на выбор, в которые включены традиционные праздничные блюда и напитки.</p>
+            <p>Стоимость: от 20 000 тенге</p>
+            <p>Адрес: ул. Кабанбай батыра, 34</p>
+            <p>Телефон: +7 707 258 85 05</p>
+            <p><b>Багратиони</b></p>
+            <p>Отметить новогодние корпоративы в ресторане грузинской кухни можно с 20 по 30 декабря. Шоу-программа радует красочностью: гостей ждут зажигательные ведущие, DJ, певец на весь вечер, Снегурочка и Дед Мороз, Цыгане, Хостес драконы, лазерное шоу, камера спиннер 360, интерактив «Кот в мешке» и огненные восточные танцы.</p>
+            <p>Стоимость: 23 000 - 25 000 тенге</p>
+            <p>Адрес: Туран 25</p>
+            <p>Телефон: +7 717 240 21 48, +7 775 902 24 17</p>
+            <p><b>MeATADOR</b></p>
+            <p>Ресторан проводит новогодние корпоративы с насыщенной шоу-программой: праздничная атмосфера, вкусная кухня, а также вас ждет комплемент от шеф-повара. В программе – веселый ведущий, Дед мороз и снегурочка, Деревня дураков (каламбур) и многое другое. Вместительность ресторана – до 60 человек.</p>
+            <p>Стоимость: от 25 000 тенге с человека</p>
+            <p>Адрес: пр. Туран, 60</p>
+            <p>Телефон: +7 701 032 66 60, +7 717 251 68 50</p>
+            <p><b>Mona Lisa</b></p>
+            <p>Mona Lisa – mixology бар с чудесной атмосферой, красивым интерьером и вкусными коктейлями. Провести корпоратив в заведении можно с 15 по 30 декабря. Бодрый ведущий, веселый Дед Мороз со Снегурочкой и бойкий диджей подготовили гостям захватывающий праздник. Кроме того, вас ждут различные конкурсы и подарки.</p>
+            <p>Стоимость: 25 000 тенге</p>
+            <p>Адрес: ​пр. Мангилик Ел, 40</p>
+            <p>Телефон: +7 702 774 88 55 </p>
+            <p><b>Ресторан Portofino</b></p>
+            <p>Ресторан, помимо пикантного новогоднего стола, готов порадовать шикарной шоу-программой. Виртуозный ведущий, зажигательный диджей, неподражаемые мимы, вокально-инструментальная группа Via Victoria, чарующие восточные танцы, а также выступление танцевального шоу «Венецианский карнавал» – праздничное настроение обеспечено гостям на весь вечер. Также будут интерактивные шоу и конкурсы от Деда Мороза и Снегурочки.</p>
+            <p>Стоимость: от 25 000 тенге с человека </p>
+            <p>Адрес: ​пр. Туран, 27</p>
+            <p>Телефон: +7 701 100 53 73</p>
+            <p><b>ААА Resto hall​</b></p>
+            <p>Ресторанный комплекс привлекает просторным и светлым залом и отлично подойдет для больших компаний. Новогоднее меню изобилует традиционными праздничными блюдами, из которого можно выбрать подходящий для вас пакет. В шоу-программе участвуют Дед Мороз и Снегурочка, ведущий вечера Даурен Амреев, музыкан-певец Максат Бралиев, инструментальная группа Boston и интерактивы от Gold Step.</p>
+            <p>Стоимость: 25 000 - 30 000 тенге</p>
+            <p>Адрес: ул. Жургенова, 18/2 ЖК «Аулие Ата»</p>
+            <p>Телефон: +7 701 124 44 80</p>
+            <p><b>Astana Nury</b></p>
+            <p>Здесь можно забронировать столики для празднования корпоратива с 20 по 30 декабря. Гостей развлекут главные персонажи Нового года – Дед Мороз и Снегурочка, ведущий шоумен и вокальное сопровождение. Помимо этого, вас ждет яркая фотозона, световое шоу «Блеск» и фуршетный стол</p>
+            <p>Стоимость: от 30 000 тенге</p>
+            <p>Адрес: Республики 3/2</p>
+            <p>Телефон: +7 701 042 93 39, +7 717 243 93 39</p>
+            <hr>
+             <p><div class="teg">
+              <div class="tegs">{{ place.address }}</div>
+              <div class="tegs">{{ place.phone_number }}</div>
+             </div></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+
+<footer>
+
+    
+    <div class="footer-center">
+        <div class="fuuter">
+            <div class="inner-fuuter">
+                <i class="fa fa-youtube-play fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-telegram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-instagram fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+
+            </div>
+            <div class="inner-fuuter">
+                <a href="">О нас</a>
+                <a href="">Контакты</a>
+                <a href="">Поддержать нас</a>
+                <a href="">Политика сайта</a>
+                
+            </div>
+            <div class="inner-futer">
+                <p>Our project</p>
+                <p>Cazino</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
